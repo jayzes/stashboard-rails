@@ -1,0 +1,40 @@
+<% content_for :js_end do %>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        stashboard.fillIndex();
+      });
+    </script>
+<% end %>
+
+<div id="webservices" class="frame">
+  
+    <table id="service-list">
+      <thead>
+        <tr>
+          <th>Service</th>
+          <th class="today">Current</th>
+      </thead>
+
+      <tbody id="services-body">
+      </tbody>
+    </table>
+  
+  <% if user_is_admin? %>
+    <a id="add-service" class="button" href="#">Add New Service</a>
+  <% end %>
+        
+  <%= render :partial => 'legend' %>
+  
+</div>
+      
+<% if user_is_admin? %>
+
+  <div class="dialog" id="add-service-modal" title="Add New Service">
+    <label  for="service_name">Name</label>
+    <input type="text" id="service_name" name="service[name]">
+    <label for="service_description">Description</label>
+    <textarea id="service_description" name="service[description]"></textarea>
+  </div>
+
+<% end %>
+

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title><%= title %></title>
+    <%= stylesheet_link_tag 'reset', 'style', 'jqueryui', 'prettify', :media => :screen %>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+    <%= javascript_include_tag 'common' %>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $(".button").button();
+        $("#notice a").click(function(){
+          $("#notice").hide();
+        });
+      });
+    </script>
+    <%= yield :js %>
+  </head>
+  <body>
+    <div id="wrapper">
+      <div id="header">
+	<div id="notice"><span></span><a href="#">X</a></div>
+        <img id="logo" src="/images/logo.png" alt="Logo"/>
+        <a href="/"><h1 id="title"><%= title %></h1></a>
+      </div>
+      <div id="content">
+        <%= yield %>
+      </div>
+      <div id="push"></div>
+    </div>
+    <div id="footer">
+      <ul class="left">
+        <li>
+          <% if login_link %>
+            <a href="<%= login_link %>">
+              <% if user %>
+                Logout
+              <% else %>
+                Login
+              <% end %>
+            </a>
+          <% end %>
+        </li>
+	<li>-</li>
+	<li>
+	  <a href="/documentation/overview">
+            API Documentation
+          </a>
+	</li>
+        <li>-</li>
+        <li>Copyright (c) <%= Date.today.year %> <a href="http://www.twilio.com">Twilio Inc.</a></li>
+       <li>-</li>
+       <li id="icons">Icons by <a href="http://p.yusukekamiyamane.com/">Yusuke Kamiyamane</a></li>
+      </ul>
+      <ul class="right">
+	<li id="powered"><a href="http://www.stashboard.org">POWERED BY <img src="/images/poweredbystash.png" alt="stash!" /> STASHBOARD</a></li>
+       </ul>
+    </div>
+    <%= yield :js_end %>
+    <%= javascript_include_tag 'prettify' %>
+  </body>
+</html>
